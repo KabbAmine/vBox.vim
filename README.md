@@ -1,6 +1,6 @@
 # vBox - <small>A simple template engine for vim</small>
 
-![Badge version](https://img.shields.io/badge/version-0.1.0-blue.svg?style=flat-square "Badge for version")
+![Badge version](https://img.shields.io/badge/version-0.1.1-blue.svg?style=flat-square "Badge for version")
 ![License version](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square "Badge for license")
 
 Introduction
