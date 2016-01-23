@@ -179,38 +179,34 @@ Check my [configuration](#configuration) for more examples.
 
 ## My configuration <a id="myconfiguration"></a>
 
-```
+```vim
+nnoremap <S-F2> :VBEdit 
 let g:vbox = {
 			\ 'dir': '~/.vim/various/templates',
 			\ 'empty_buffer_only': 0
 		\ }
 let g:vbox.variables = {
-			\ '%NAME%'   : 'Kabbaj Amine',
-			\ '%MAIL%'   : 'amine.kabb@gmail.com',
-			\ '%LICENSE%': 'MIT',
-			\ '%PROJECT%': 'f=fnamemodify(getcwd(), ":t")',
-			\ '%YEAR%'   : 'f=strftime("%Y")'
+			\ '%NAME%'     : 'Kabbaj Amine',
+			\ '%MAIL%'     : 'amine.kabb@gmail.com',
+			\ '%LICENSE%'  : 'MIT',
+			\ '%PROJECT%'  : 'f=fnamemodify(getcwd(), ":t")',
+			\ '%YEAR%'     : 'f=strftime("%Y")'
 		\ }
-
-" Quickly execute the edit command (Note the space in the end)
-nnoremap <S-F2> :VBEdit 
-
-" Enable auto-insertion of templates for some file types
 augroup VBoxAuto
 	autocmd!
-	autocmd BufNewFile README.md  :VBTemplate
-	autocmd BufNewFile LICENSE    :VBTemplate license-MIT
-	autocmd BufNewFile *.sh       :VBTemplate
+	autocmd BufNewFile README.md,CHANGELOG.md       :VBTemplate
+	autocmd BufNewFile LICENSE                      :VBTemplate license-MIT
+	autocmd BufNewFile *.py,*.sh,*.php,*.html,*.js  :VBTemplate
 augroup END
 ```
 
 ## TODO
 
-- [ ] A doc file
+- [x] A doc file
 
 ## Notes
 
-Even if the plugin works as it should, it needs more testing, so feel free to report issues and submit PR.
+Even if the plugin works as expected, it needs more testing, so feel free to report issues and submit PR on the github repository https://github.com/kabbamine/vBox.vim
 
 Thanks to Bram Moolenaar for creating the best piece of software in the world :heart:
 
