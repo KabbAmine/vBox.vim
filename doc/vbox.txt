@@ -1,0 +1,246 @@
+*vBox*		A simple template engine for vim
+
+	For Vim version 7.0 and above	Last change: 2016-01-23
+
+	VBOX - A SIMPLE TEMPLATE ENGINE FOR VIM ~
+							from Kabbaj Amine
+
+Mail	: amine.kabb@gmail.com
+Repo	: https://github.com/KabbAmine/vBox.vim
+License : MIT
+
+========================================================================
+|CONTENTS|						*vBox-contents*
+
+1. DESCRIPTION					|vBox-description|
+2. INSTALLATION					|vBox-installation|
+3. USAGE						|vBox-usage|
+	3.1. QUICK-START			|vBox-usage:quick-start|
+	3.2. COMMANDS				|vBox-usage:commands|
+	3.3. TEMPLATES				|vBox-usage:templates|
+4. CONFIGURATION				|vBox-config|
+	4.1. OPTIONS				|vBox-config:options|
+	4.2. VARIABLES				|vBox-config:variables|
+	4.3. EXAMPLE				|vBox-config:example|
+5. NOTES						|vBox-notes|
+
+========================================================================
+1. |DESCRIPTION|
+*vBox-description*
+
+This is a simple plugin for quickly create and insert templates.
+
+# Features
+
+- Templates specific to file types or file names.
+- Customizable template variables.
+- Command completion.
+- Live template creation & edition.
+
+# Cons
+
+- No templates by default, create your own.
+- No auto insertion by default (Use `BufNewFile` for that).
+- The file type matching is done according to the current `&ft`, not the
+  extension.
+
+========================================================================
+2. |INSTALLATION|
+*vBox-installation*
+
+Use your preferred method to install the plugin. I recommend you to use a
+plugin manager.
+
+e.g with [Vim-plug](https://github.com/junegunn/vim-plug)
+>
+	Plug 'KabbAmine/vBox.vim'
+<
+========================================================================
+3. |USAGE|
+*vBox-usage*
+
+------------------------------------------------------------------------
+3.1. |QUICK-START|
+*vBox-usage:quick-start*
+
+Define a directory where the templates will be stocked:
+>
+	let g:vbox = {'dir': 'path/to/folder'}
+<
+Then use `VBEdit {filetype or filename}` to create/edit templates and
+`:VBTemplate {template}` to insert them.
+
+------------------------------------------------------------------------
+3.2. |COMMANDS|
+*vBox-usage:commands*
+
+The plugin provides 2 commands:
+>
+	VBTemplate [template]
+
+Use it to:
+
+- Expand `[template]` if its given.
+- Define automatically the appropriate* template and expand it if `[template]`
+  is not given.
+
+------------------------------------------------------------------------
+>
+	VBEdit [template]
+
+When executed open a vim split and:
+
+- Edit the appropriate* template if `[template]` is not given.
+- Edit `[template]` if its given and exists in your templates.
+- Create° a new file named `template` if `[template]` is given but does not
+  exist.
+
+------------------------------------------------------------------------
+
+Template names can be completed using `Tab` for both commands.
+* The plugin defines appropriate template from the file name or the file type.
+° Before creating the file, if the given template name does not start with
+`f=` or `t=`, the plugin asks for the template's type (See next part).
+
+------------------------------------------------------------------------
+3.3. |TEMPLATES|
+*vBox-usage:templates*
+
+**There are no templates provided by default**
+
+----------------
+
+The plugin supports 2 kinds of templates
+
+1. `t=filetype`: File type template (e.g. `t=python`, `t=vim`...)
+	They are normal templates that match a certain file type, `t=html` for
+	html files, `t=c` for C files and so on...
+
+2. `f=filename`: File name template (e.g. `f=README.md`, `f=.aVeryUsefulConfigFile`...)
+	Those templates should match the entire file name and are very useful for
+	common files or portions of code (readme, license, config files, vim
+	plugin skeleton...).
+
+The templates should be in `g:vbox.dir` directory (See |vBox-config:options|).
+
+You can use template variables (placeholders) that will be replaced or
+evaluated when the templates are generated (e.g `%FILE%` will be replaced by
+the current file name without extension), see |vBox-config:variables|.
+
+P.S: You can check my own templates
+(https://github.com/KabbAmine/myVimFiles/tree/master/various/templates) to
+have an idea.
+
+========================================================================
+4. |CONFIGURATION|
+*vBox-config*
+
+The configuration of the plugin is stocked in one global dictionary `g:vbox`.
+To define/modify an option you can either:
+>
+	let g:vbox = {}
+	let g:vbox.option1 = 'foo'
+	let g:vbox.option2 = 0
+<
+Or:
+>
+	let g:vbox = {
+				\ 'option1': 'foo',
+				\ 'option2': 0
+			\ }
+
+------------------------------------------------------------------------
+4.1. |OPTIONS|
+*vBox-config:options*
+
+`g:box.dir`
+	Templates location
+	{default: `''`}
+
+`g:box.empty_buffer_only`
+	Expand templates only if the buffer is empty
+	{default: `1`}
+
+`g:box.verbose`
+	Echoes informations (*Keep it to 1*)
+	{default: `1`}
+
+`g:vbox.edit_split`
+	Split directions when using `VBEdit`
+	{default: `'rightbelow vertical'`}
+
+`g:vbox.variables`
+	User variables, see |vBox-config:variables|
+	{default: `{}`}
+
+------------------------------------------------------------------------
+4.2. |VARIABLES|
+*vBox-config:variables*
+
+The plugin defines a few variables that will be expanded:
+
+| pattern                 | result                      |
+| ------------------------| -------------------------   |
+| `%_%`                     | Cursor position             |
+| `%DATE%`                  | e.g. 2016-01-22             |
+| `%EXT%`                   | File extension              |
+| `%FILE%`                  | File name without extension |
+| `%HOSTNAME%`              | Host name                   |
+| `%TIME%`                  | e.g. 16:47                  |
+| `%USER%`                  | Username                    |
+
+You can add you own patterns or overwrite the default ones (Except `%_%`) in
+`g:vbox.variables` (The syntax is `%PATTERN%`).
+e.g. >
+	let g:vbox.variables = {
+				\ '%FOO%'  : 'bar',
+				\ '%USER%' : 'Mister Foo'
+			\ }
+<
+
+You can also use vim expressions or funcref, just put `f=` before the value.
+e.g. >
+	let g:vbox.variables = {
+				\ '%CWD%' : 'f=getcwd(),
+				\ '%YEAR%': 'f=strftime("%Y")'
+			\ }
+>
+Those values will be evaluated using `eval()`.
+
+------------------------------------------------------------------------
+4.3. |EXAMPLE|
+*vBox-config:example*
+
+An example of configuration >
+	let g:vbox = {
+				\ 'dir': '~/.vim/templates',
+				\ 'empty_buffer_only': 0
+			\ }
+	let g:vbox.variables = {
+				\ '%NAME%'     : 'Mister Foo',
+				\ '%MAIL%'     : 'foobar@mail.ml',
+				\ '%LICENSE%'  : 'MIT',
+				\ '%PROJECT%'  : 'f=fnamemodify(getcwd(), ":t")',
+				\ '%YEAR%'     : 'f=strftime("%Y")'
+			\ }
+	augroup VBoxAuto
+		autocmd!
+		autocmd BufNewFile README.md,CHANGELOG.md       :VBTemplate
+		autocmd BufNewFile LICENSE                      :VBTemplate license-MIT
+		autocmd BufNewFile *.py,*.sh,*.php,*.html,*.js  :VBTemplate
+	augroup END
+<
+========================================================================
+5. |NOTES|
+*vBox-notes*
+
+Even if the plugin works as expected, it needs more testing, so feel free to
+report issues and submit PR.
+
+Thanks To Bram Moolenaar for creating the best piece of software in the world
+:D
+
+Thanks To you if you're using vBox.
+
+========================================================================
+vim:tw=78:ts=4:ft=help:norl:noet
