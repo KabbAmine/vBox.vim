@@ -28,11 +28,11 @@ Quick start
 
 Define a directory where the templates will be stocked:
 
-```
+```vim
 let g:vbox = {'dir': 'path/to/folder'}
 ```
 
-Then use `:VBEdit {filetype or filename}` to create/edit templates and `:VBTemplate {template}` to insert them.
+Then use `:VBEdit [filetype or filename]` to create/edit templates and `:VBTemplate [template]` to insert them.
 
 Installation
 -----------
@@ -41,7 +41,7 @@ Use your preferred method to install the plugin. I recommend you to use a plugin
 
 e.g with [Vim-plug](https://github.com/junegunn/vim-plug)
 
-```
+```vim
 Plug 'KabbAmine/vBox.vim'
 ```
 
@@ -52,7 +52,7 @@ The plugin provides 2 commands:
 
 -----------------
 
-```
+```vim
 :VBTemplate [template]
 ```
 
@@ -63,7 +63,7 @@ Use it to:
 
 -----------------
 
-```
+```vim
 :VBEdit [template]
 ```
 
@@ -116,7 +116,7 @@ let g:vbox.option2 = 0
 
 Or:
 
-```
+```vim
 let g:vbox = {
 			\ 'option1': 'foo',
 			\ 'option2': 0
@@ -153,7 +153,7 @@ You can add you own patterns or overwrite the default ones (Except `%_%`) in `g:
 
 e.g.
 
-```
+```vim
 let g:vbox.variables = {
 			\ '%FOO%'  : 'bar',
 			\ '%USER%' : 'Mister Foo'
@@ -164,9 +164,9 @@ You can also use vim expressions or funcref, just put `f=` before the value.
 
 e.g.
 
-```
+```vim
 let g:vbox.variables = {
-			\ '%CWD%' : 'f=getcwd(),
+			\ '%CWD%' : 'f=getcwd()',
 			\ '%YEAR%': 'f=strftime("%Y")'
 		\ }
 ```
