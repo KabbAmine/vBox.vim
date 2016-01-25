@@ -108,7 +108,7 @@ The configuration of the plugin is stocked in one global dictionary `g:vbox`.
 
 To define/modify an option you can either:
 
-```
+```vim
 let g:vbox = {}
 let g:vbox.option1 = 'foo'
 let g:vbox.option2 = 0
@@ -130,8 +130,8 @@ let g:vbox = {
 | `dir`                     | Templates location                                  | `''`                    |
 | `empty_buffer_only`       | Expand templates only if the buffer is empty        | `1`                     |
 | `verbose`                 | Echoes informations (*Keep it to 1*)                | `1`                     |
-| `edit_split`              | Split directions when using `VBEdit`                | `'rightbelow vertical'` |
-| `variables`               | See [template variables](#variables)                |
+| `edit_split`              | Split direction when using `VBEdit`                 | `'rightbelow vertical'` |
+| `variables`               | See [template variables](#variables)                | `{}`
 
 There is no option for auto-insertion of templates, but you can easily make such functionality using `BufNewFile` event, check [the examples in my configuration](#myconfiguration)
 
@@ -149,7 +149,7 @@ The plugin defines a few variables that will be expanded:
 | `%TIME%`                  | e.g. 16:47                  |
 | `%USER%`                  | Username                    |
 
-You can add you own patterns or overwrite the default ones (Except `%_%`) in `g:vbox.variables` (The syntax is `%PATTERN%`).
+You can add your own patterns or overwrite the default ones (Except `%_%`) in `g:vbox.variables` (The syntax is `%PATTERN%`).
 
 e.g.
 

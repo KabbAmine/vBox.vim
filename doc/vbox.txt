@@ -1,6 +1,6 @@
 *vBox*		A simple template engine for vim
 
-	For Vim version 7.0 and above	Last change: 2016-01-23
+	For Vim version 7.0 and above	Last change: 2016-02-27
 
 	VBOX - A SIMPLE TEMPLATE ENGINE FOR VIM ~
 							from Kabbaj Amine
@@ -153,20 +153,20 @@ Or:
 4.1. |OPTIONS|
 *vBox-config:options*
 
-`g:box.dir`
+`g:vbox.dir`
 	Templates location
 	{default: `''`}
 
-`g:box.empty_buffer_only`
+`g:vbox.empty_buffer_only`
 	Expand templates only if the buffer is empty
 	{default: `1`}
 
-`g:box.verbose`
+`g:vbox.verbose`
 	Echoes informations (*Keep it to 1*)
 	{default: `1`}
 
 `g:vbox.edit_split`
-	Split directions when using `VBEdit`
+	Split direction when using `VBEdit`
 	{default: `'rightbelow vertical'`}
 
 `g:vbox.variables`
@@ -189,7 +189,7 @@ The plugin defines a few variables that will be expanded:
 | `%TIME%`                  | e.g. 16:47                  |
 | `%USER%`                  | Username                    |
 
-You can add you own patterns or overwrite the default ones (Except `%_%`) in
+You can add your own patterns or overwrite the default ones (Except `%_%`) in
 `g:vbox.variables` (The syntax is `%PATTERN%`).
 e.g. >
 	let g:vbox.variables = {
