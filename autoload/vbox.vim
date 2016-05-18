@@ -1,7 +1,7 @@
 " autoload/vbox.vim
 
 " CREATION     : 2016-01-14
-" MODIFICATION : 2016-01-22
+" MODIFICATION : 2016-05-18
 " MAINTAINER   : Kabbaj Amine <amine.kabb@gmail.com>
 " LICENSE      : MIT
 
@@ -12,9 +12,10 @@
 "	(1)
 "	.verbose           => Enable/Disable echo's (0)
 "	.edit_split        => Split direction ('rightbelow vertical')
+"	.auto_mkdir        => Create templates directory if it does not exist
 let s:config = g:vbox
 " Ensure that .dir ends with a slash
-let s:config.dir = fnamemodify(s:config.dir, ':p')
+let s:config.dir = s:config.dir =~# '/$' ? s:config.dir : s:config.dir . '/'
 " }}}
 
 function! s:Log(msg, ...) abort " {{{1
@@ -31,8 +32,12 @@ function! s:Log(msg, ...) abort " {{{1
 endfunction
 function! s:CheckBox() abort " {{{1
 	if !isdirectory(s:config.dir)
-		call s:Log(s:config.dir . ' is not a valid directory', 2)
-		return 0
+		if s:config.auto_mkdir
+			call mkdir(s:config.dir)
+		else
+			call s:Log(s:config.dir . ' is not a valid directory', 2)
+			return 0
+		endif
 	endif
 	return 1
 endfunction

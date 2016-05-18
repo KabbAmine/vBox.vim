@@ -1,7 +1,7 @@
 " A simple template engine for vim.
 
 " CREATION     : 2016-01-14
-" MODIFICATION : 2016-01-22
+" MODIFICATION : 2016-05-18
 " MAINTAINER   : Kabbaj Amine <amine.kabb@gmail.com>
 " LICENSE      : MIT
 
@@ -34,6 +34,9 @@ if !has_key(g:vbox, 'verbose')
 endif
 if !has_key(g:vbox, 'edit_split')
 	let g:vbox.edit_split = 'rightbelow vertical'
+endif
+if !has_key(g:vbox, 'auto_mkdir')
+	let g:vbox.auto_mkdir = 1
 endif
 " }}}
 
