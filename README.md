@@ -118,8 +118,9 @@ Or:
 
 ```vim
 let g:vbox = {
-			\ 'option1': 'foo',
-			\ 'option2': 0
+let g:vbox = {
+			\ 'option1' : 'foo',
+			\ 'option2' : 0
 		\ }
 ```
 
@@ -128,6 +129,7 @@ let g:vbox = {
 | option                    | description                                         | default                 |
 | ------------------------- | --------------------------------------------------- | -------------------     |
 | `dir`                     | Templates location                                  | `''`                    |
+| `auto_mkdir`              | Automatically create templates folder               | `1`                    |
 | `empty_buffer_only`       | Expand templates only if the buffer is empty        | `1`                     |
 | `verbose`                 | Echoes informations (*Keep it to 1*)                | `1`                     |
 | `edit_split`              | Split direction when using `VBEdit`                 | `'rightbelow vertical'` |
@@ -155,9 +157,9 @@ e.g.
 
 ```vim
 let g:vbox.variables = {
-			\ '%FOO%'  : 'bar',
-			\ '%USER%' : 'Mister Foo'
-		\ }
+			\	'%FOO%'    : 'bar',
+			\	'%USER%'   : 'Mister Foo'
+			\ }
 ```
 
 You can also use vim expressions or funcref, just put `f=` before the value.
@@ -166,9 +168,9 @@ e.g.
 
 ```vim
 let g:vbox.variables = {
-			\ '%CWD%' : 'f=getcwd()',
-			\ '%YEAR%': 'f=strftime("%Y")'
-		\ }
+			\	'%CWD%'    : 'f=getcwd()',
+			\	'%YEAR%'   : 'f=strftime("%Y")'
+			\ }
 ```
 
 Those values will be evaluated using `eval()`.
@@ -182,21 +184,22 @@ Check my [configuration](#configuration) for more examples.
 ```vim
 nnoremap <S-F2> :VBEdit 
 let g:vbox = {
-			\ 'dir': '~/.vim/various/templates',
-			\ 'empty_buffer_only': 0
-		\ }
+			\	'dir': g:vimDir . '/misc/templates',
+			\	'empty_buffer_only': 0
+			\ }
 let g:vbox.variables = {
-			\ '%NAME%'     : 'Kabbaj Amine',
-			\ '%MAIL%'     : 'amine.kabb@gmail.com',
-			\ '%LICENSE%'  : 'MIT',
-			\ '%PROJECT%'  : 'f=fnamemodify(getcwd(), ":t")',
-			\ '%YEAR%'     : 'f=strftime("%Y")'
-		\ }
+			\	'%NAME%'     : 'Kabbaj Amine',
+			\	'%MAIL%'     : 'amine.kabb@gmail.com',
+			\	'%LICENSE%'  : 'MIT',
+			\	'%PROJECT%'  : 'f=fnamemodify(getcwd(), ":t")',
+			\	'%YEAR%'     : 'f=strftime("%Y")',
+			\	'%REPO%'     : 'https://github.com/KabbAmine/'
+			\ }
 augroup VBoxAuto
 	autocmd!
-	autocmd BufNewFile README.md,CHANGELOG.md       :VBTemplate
-	autocmd BufNewFile LICENSE                      :VBTemplate license-MIT
-	autocmd BufNewFile *.py,*.sh,*.php,*.html,*.js  :VBTemplate
+	autocmd BufNewFile README.md,CHANGELOG.md,.tern-project  :VBTemplate
+	autocmd BufNewFile LICENSE                               :VBTemplate license-MIT
+	autocmd BufNewFile *.py,*.sh,*.php,*.html,*.js,*.c       :VBTemplate
 augroup END
 ```
 

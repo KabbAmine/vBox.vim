@@ -1,6 +1,6 @@
 *vBox*		A simple template engine for vim
 
-	For Vim version 7.0 and above	Last change: 2016-02-27
+	For Vim version 7.0 and above	Last change: 2016-05-18
 
 	VBOX - A SIMPLE TEMPLATE ENGINE FOR VIM ~
 							from Kabbaj Amine
@@ -145,8 +145,8 @@ To define/modify an option you can either:
 Or:
 >
 	let g:vbox = {
-				\ 'option1': 'foo',
-				\ 'option2': 0
+			\	'option1': 'foo',
+			\	'option2': 0
 			\ }
 
 ------------------------------------------------------------------------
@@ -156,6 +156,10 @@ Or:
 `g:vbox.dir`
 	Templates location
 	{default: `''`}
+
+`g:vbox.auto_mkdir`
+	Automatically create templates folder
+	{default: 1}
 
 `g:vbox.empty_buffer_only`
 	Expand templates only if the buffer is empty
@@ -193,16 +197,16 @@ You can add your own patterns or overwrite the default ones (Except `%_%`) in
 `g:vbox.variables` (The syntax is `%PATTERN%`).
 e.g. >
 	let g:vbox.variables = {
-				\ '%FOO%'  : 'bar',
-				\ '%USER%' : 'Mister Foo'
+			\	'%FOO%'  : 'bar',
+			\	'%USER%' : 'Mister Foo'
 			\ }
 <
 
 You can also use vim expressions or funcref, just put `f=` before the value.
 e.g. >
 	let g:vbox.variables = {
-				\ '%CWD%' : 'f=getcwd(),
-				\ '%YEAR%': 'f=strftime("%Y")'
+			\	'%CWD%' : 'f=getcwd(),
+			\	'%YEAR%': 'f=strftime("%Y")'
 			\ }
 >
 Those values will be evaluated using `eval()`.
@@ -213,15 +217,15 @@ Those values will be evaluated using `eval()`.
 
 An example of configuration >
 	let g:vbox = {
-				\ 'dir': '~/.vim/templates',
-				\ 'empty_buffer_only': 0
+			\	'dir': '~/.vim/templates',
+			\	'empty_buffer_only': 0
 			\ }
 	let g:vbox.variables = {
-				\ '%NAME%'     : 'Mister Foo',
-				\ '%MAIL%'     : 'foobar@mail.ml',
-				\ '%LICENSE%'  : 'MIT',
-				\ '%PROJECT%'  : 'f=fnamemodify(getcwd(), ":t")',
-				\ '%YEAR%'     : 'f=strftime("%Y")'
+			\	'%NAME%'     : 'Mister Foo',
+			\	'%MAIL%'     : 'foobar@mail.ml',
+			\	'%LICENSE%'  : 'MIT',
+			\	'%PROJECT%'  : 'f=fnamemodify(getcwd(), ":t")',
+			\	'%YEAR%'     : 'f=strftime("%Y")'
 			\ }
 	augroup VBoxAuto
 		autocmd!
