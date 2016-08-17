@@ -74,7 +74,7 @@ Then use `VBEdit {filetype or filename}` to create/edit templates and
 3.2. |COMMANDS|
 *vBox-usage:commands*
 
-The plugin provides 2 commands:
+The plugin provides 3 commands:
 >
 	VBTemplate [template]
 
@@ -96,6 +96,14 @@ When executed open a vim split and:
   exist.
 
 ------------------------------------------------------------------------
+>
+	VBDelete template
+
+Delete `[template]`.
+
+------------------------------------------------------------------------
+
+NOTES:
 
 Template names can be completed using `Tab` for both commands.
 * The plugin defines appropriate template from the file name or the file type.

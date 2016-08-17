@@ -48,7 +48,7 @@ Plug 'KabbAmine/vBox.vim'
 Commands
 --------
 
-The plugin provides 2 commands:
+The plugin provides 3 commands:
 
 -----------------
 
@@ -75,7 +75,17 @@ When executed open a vim split and:
 
 -----------------
 
-- *Template names can be completed using `Tab` for both commands.*
+```vim
+:VBDelete template
+```
+
+Delete `[template]`.
+
+-----------------
+
+**NOTES**
+
+- *Template names can be completed using `Tab` for all commands.*
 - *<a id="star"><sup>T</sup></a> The plugin defines appropriate template from the file name or the file type.*
 - *<a id="new"><sup>N</sup></a> Before creating the file, if the given template name does not start with `f=` or `t=`, the plugin asks for the template's type (See next part).*
 
