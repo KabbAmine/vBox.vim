@@ -1,7 +1,7 @@
 " A simple template engine for vim.
 
 " CREATION     : 2016-01-14
-" MODIFICATION : 2016-05-18
+" MODIFICATION : 2016-08-17
 " MAINTAINER   : Kabbaj Amine <amine.kabb@gmail.com>
 " LICENSE      : MIT
 
@@ -16,33 +16,11 @@ let s:saveCpoptions = &cpoptions
 set cpoptions&vim
 " 1}}}
 
-" Configuration {{{1
-if !exists('g:vbox')
-	let g:vbox = {}
-endif
-if !has_key(g:vbox, 'dir')
-	let g:vbox.dir = ''
-endif
-if !has_key(g:vbox, 'variables')
-	let g:vbox.variables = {}
-endif
-if !has_key(g:vbox, 'empty_buffer_only')
-	let g:vbox.empty_buffer_only = 1
-endif
-if !has_key(g:vbox, 'verbose')
-	let g:vbox.verbose = 1
-endif
-if !has_key(g:vbox, 'edit_split')
-	let g:vbox.edit_split = 'rightbelow vertical'
-endif
-if !has_key(g:vbox, 'auto_mkdir')
-	let g:vbox.auto_mkdir = 1
-endif
-" }}}
-
 " Commands {{{1
-command! -nargs=? -complete=custom,vbox#Complete VBTemplate :call vbox#PutTemplate(<f-args>)
-command! -nargs=? -complete=custom,vbox#Complete VBEdit     :call vbox#EditTemplate(<f-args>)
+command! -nargs=? -complete=custom,vbox#Complete VBTemplate
+			\	call vbox#e('expand', <f-args>)
+command! -nargs=? -complete=custom,vbox#Complete VBEdit
+			\	call vbox#e('edit', <f-args>)
 " }}}
 
 " Restore default vim options {{{1
