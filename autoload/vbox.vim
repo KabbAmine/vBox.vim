@@ -207,6 +207,28 @@ function! s:vbox.editTemplate(...) abort " {{{1
 		redraw
 	endif
 endfunction
+function! s:vbox.deleteTemplate(template) abort " {{{1
+	if empty(a:template)
+		return
+	endif
+
+	if !self.checkBox()
+		return
+	endif
+
+	let l:cfg = self.config
+
+	let l:tf = self.getTemplateFile(a:template)
+	if l:tf ==# '0'
+		return
+	endif
+
+	if delete(l:tf) ==# 0
+		call self.log(l:tf . ' was successfully deleted')
+	else
+		call self.log('Somenthing went wrong, ' . l:tf . ' was not deleted', 2)
+	endif
+endfunction
 " }}}
 
 function! s:Goto_(pos) abort " {{{1
@@ -230,6 +252,8 @@ function! vbox#e(action, ...) abort " {{{1
 
 	if a:action ==# 'expand'
 		call l:v.expandTemplate(l:arg)
+	elseif a:action ==# 'delete'
+		call l:v.deleteTemplate(l:arg)
 	elseif a:action ==# 'edit'
 		call l:v.editTemplate(l:arg)
 	endif
