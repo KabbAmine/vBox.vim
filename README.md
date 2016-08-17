@@ -108,7 +108,7 @@ The templates should be in `g:vbox.dir` directory (See [configuration](#configur
 
 You can use template variables (placeholders) that will be replaced or evaluated when the templates are generated (e.g `%FILE%` will be replaced by the current file name without extension), see [template variables](#variables).
 
-**P.S:** You can check [my own templates](https://github.com/KabbAmine/myVimFiles/tree/master/various/templates) to have an idea.
+**P.S:** You can check [my own templates](https://github.com/KabbAmine/myVimFiles/tree/master/misc/templates) to have an idea.
 
 
 Configuration <a id="configuration"></a>
