@@ -1,7 +1,7 @@
 " autoload/vbox.vim
 
 " CREATION     : 2016-01-14
-" MODIFICATION : 2016-08-17
+" MODIFICATION : 2016-09-20
 " MAINTAINER   : Kabbaj Amine <amine.kabb@gmail.com>
 " LICENSE      : MIT
 
@@ -226,7 +226,7 @@ function! s:vbox.deleteTemplate(template) abort " {{{1
 	if delete(l:tf) ==# 0
 		call self.log(l:tf . ' was successfully deleted')
 	else
-		call self.log('Somenthing went wrong, ' . l:tf . ' was not deleted', 2)
+		call self.log('Something went wrong, ' . l:tf . ' was not deleted', 2)
 	endif
 endfunction
 " }}}
